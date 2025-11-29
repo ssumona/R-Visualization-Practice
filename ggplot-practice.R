@@ -1,7 +1,10 @@
 library(tidyverse)
 library(dslabs)
 library(ggplot2)
+library(gapminder)
 
-data("murders")
+data("gapminder")
 
-head(murders)
+head(gapminder)
+
+
