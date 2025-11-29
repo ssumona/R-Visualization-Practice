@@ -1,0 +1,61 @@
+---
+title: "plot"
+output: html_document
+---
+
+Load library
+
+maybe the dslabs not needed.
+
+```{r}
+library(dslabs)
+library(tidyverse)
+library(ggplot2)
+library(gapminder)
+```
+
+Load data
+
+```{r}
+data("gapminder")
+```
+
+Check head
+
+```{r}
+head(gapminder)
+```
+
+Now I want to do the following:
+
+-   Sort the data
+
+-   Plot the data
+
+## Sort Data
+
+```{r}
+oldest_year <- min(gapminder$year)
+sprintf("The oldest data is from %d AD.", oldest_year)
+```
+
+## Plot data
+
+```{r}
+ggplot(data = gapminder %>% filter(year == 2007)) +
+  geom_point(aes(
+    x = gdpPercap,           # GDP per capita on x-axis
+    y = lifeExp,             # Life expectancy on y-axis
+    color = continent,       # Color points by continent
+    size = pop               # Size points by population
+  )) +
+  scale_x_log10() +          # Log scale for GDP axis
+  labs(
+    title = "Life Expectancy vs GDP Per Capita (2007)",
+    x = "GDP Per Capita (log scale)",
+    y = "Life Expectancy (years)",
+    color = "Continent",
+    size = "Population"
+  ) +
+  theme_minimal()            # Use a clean theme
+```
